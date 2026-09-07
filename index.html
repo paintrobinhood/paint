@@ -377,6 +377,41 @@ textarea.share{width:100%;min-height:70px;padding:10px;border-radius:8px;resize:
 }
 
 /* ---- v2: tiers, streak, rewards, result flow ---- */
+/* police-tape "coming soon" cover */
+.tape-cover{position:absolute;inset:0;z-index:5;overflow:hidden;display:flex;align-items:center;justify-content:center;background:rgba(20,20,20,.55);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);pointer-events:auto}
+.tape-cover .cs{font-family:"Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;font-weight:900;font-size:46px;line-height:.9;letter-spacing:-2px;color:#fff;text-align:center;text-shadow:0 4px 18px rgba(0,0,0,.6);text-transform:uppercase;transform:scaleY(1.25)}
+.tape-cover .cs small{display:block;font-size:11px;font-weight:600;letter-spacing:2px;margin-top:14px;transform:scaleY(.8);color:#e6e6e6}
+.tape{position:absolute;left:-30%;width:160%;height:26px;background:#ffd400;color:#101010;display:flex;align-items:center;overflow:hidden;white-space:nowrap;font-weight:800;font-size:12px;letter-spacing:1.5px;box-shadow:0 3px 10px rgba(0,0,0,.45)}
+.tape i{display:flex;flex:0 0 auto;font-style:normal;animation:tapescroll 14s linear infinite}
+.tape.t2 i{animation-duration:18s;animation-direction:reverse}
+.tape.t3 i{animation-duration:11s}
+.tape span{padding:0 18px;border-right:2px solid #101010}
+@keyframes tapescroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+@media(prefers-reduced-motion:reduce){.tape i{animation:none}}
+.tape.t1{top:22%;transform:rotate(-7deg)}
+.tape.t2{top:52%;transform:rotate(5deg)}
+.tape.t3{top:78%;transform:rotate(-3deg)}
+.tape-cover.sm .tape{height:20px;font-size:10px}
+.board{position:relative}
+.lbwrap{position:relative;min-height:170px}
+/* lobby: square-ish corners everywhere, matching the tier chips */
+.lobby .pill,.lobby .btn,.lobby .soon-badge,.lobby .lb-card,.lobby .soon,.lobby .lb-steps div,.lobby .lb-preview,.lobby .stat,.lobby .acct,.lobby .cal span{border-radius:6px}
+.lobby .soon-badge{border-radius:4px}
+.lobby .tier{border-radius:6px}
+/* coming-soon rewards */
+.lb-label{display:block;font-size:12px;color:var(--ink-3);margin:2px 0 6px}
+.lb-input{width:100%;height:38px;padding:0 12px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-size:14px}
+.lb-input:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.soon{margin-top:18px;padding:14px;border-radius:8px;border:1px dashed #5a4a2a;background:linear-gradient(180deg,#2a2218,#231d15)}
+.soon-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.soon-head b{font-size:14px}
+.soon-badge{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:3px 8px;border-radius:10px;background:#ffb347;color:#2a1a05}
+.soon p{margin:0;font-size:12.5px;color:var(--ink-2);line-height:1.55}
+.soon p b{color:#ffb347}
+.soon .ladder{margin-top:10px;opacity:.75}
+.soonpool{padding:12px 14px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-2);line-height:1.55}
+.soonpool .soon-badge{margin-right:6px;vertical-align:1px}
+.rewardbox.soon-box{border-color:#5a4a2a;background:linear-gradient(180deg,#2a2218,#231d15)}
 /* Gallery (Photos-style window) */
 .gwin{width:min(100%,760px);height:min(90dvh,620px);display:flex;flex-direction:column;background:var(--app);border:1px solid #4a4a4a;border-radius:9px;overflow:hidden;box-shadow:0 30px 60px rgba(40,60,0,.45),0 4px 12px rgba(40,60,0,.35)}
 .gwin .titlebar{flex:0 0 auto}
@@ -703,7 +738,7 @@ textarea.share{width:100%;min-height:70px;padding:10px;border-radius:8px;resize:
     <span id="modelabel" style="font-size:13px;color:var(--ink-3)">Blind draw</span>
     <div class="track"><i id="bar"></i></div>
     <button class="pill primary" id="submit">Submit</button>
-    <span class="streak" id="streak" title="Play one scored round a day to keep your streak">&#128293; Streak <b id="streakn">0</b></span>
+    <span class="streak" id="streak" title="Play one round a day (score 30+) to keep your streak">&#128293; Streak <b id="streakn">0</b></span>
     <span class="tier t0" id="tierchip" style="display:none"><i></i><span id="tiername">Paper</span></span>
     <p class="msg" id="msg">Free draw. Nothing is timed and nothing is scored.</p>
   </div>
@@ -766,6 +801,7 @@ textarea.share{width:100%;min-height:70px;padding:10px;border-radius:8px;resize:
   </header>
   <div class="podium" id="podium"></div>
   <div class="rows" id="lbside"></div>
+  <div class="tape-cover" id="boardcover" style="display:none"><div class="tape t1"><i><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span></i><i><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span></i></div><div class="tape t2"><i><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span></i><i><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span></i></div><div class="tape t3"><i><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span></i><i><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span></i></div></div>
   <div class="pool" id="pool">
     <div class="pv"><span>This cycle's pool</span><b id="poolamt">&mdash;</b></div>
     <div class="pv"><span>Eligible holders playing</span><b id="poolelig">&mdash;</b></div>
@@ -918,7 +954,7 @@ textarea.share{width:100%;min-height:70px;padding:10px;border-radius:8px;resize:
   <div class="lobby">
     <div class="lobby-bar">
       <span class="lobby-title">Blind draw</span>
-      <span class="lobby-sub">Draw a trending logo from memory</span>
+      <span class="lobby-sub">Draw a trending stocks logo from memory</span>
       <span class="grow"></span>
       <span class="lobby-rounds" id="arcpips"></span>
       <button class="wbtn close" id="startclose" aria-label="Close"><svg viewBox="0 0 10 10"><path d="M0.5 0.5l9 9M9.5 0.5l-9 9"/></svg></button>
@@ -939,11 +975,25 @@ textarea.share{width:100%;min-height:70px;padding:10px;border-radius:8px;resize:
           <div><b>2&ndash;3&times;</b><span>Clues flash back</span></div>
         </div>
         <div class="lb-pool">
-          <span>Pool this cycle</span><b id="lbpool"></b>
-          <span>Closes in</span><b id="lbclose"></b>
+          <span id="lbpoollbl">Pool this cycle</span><b id="lbpool"></b>
+          <span id="lbcloselbl">Closes in</span><b id="lbclose"></b>
         </div>
       </div>
       <div class="lobby-r">
+        <div id="soonstep" style="display:none">
+          <h3>Try it now</h3>
+          <p class="lb-sub">Free to play, no wallet needed. Your drawings are saved to the Gallery. Leaderboard and rewards open at launch.</p>
+          <button class="btn primary big" id="go0">Start drawing</button>
+          <div class="soon">
+            <div class="soon-head"><span class="soon-badge">Coming soon</span><b>$PAINT rewards</b></div>
+            <p>Every 6 hours a <b id="soonpool"></b> pool will be split between holders by score. Tiers, streak bonuses and wallet connect are already built and switch on at launch.</p>
+            <div class="ladder" id="ladder1"></div>
+            <div class="row" style="justify-content:flex-start;margin-top:10px">
+              <button class="pill" id="soonx">Follow on X for the date</button>
+              <button class="pill" id="soonreadme">Read how it works</button>
+            </div>
+          </div>
+        </div>
         <div id="walletstep">
           <h3>Connect a wallet</h3>
           <p class="lb-sub">Rounds count toward the leaderboard once a wallet is connected. Holding $PAINT makes you eligible for the pool.</p>
@@ -1043,8 +1093,9 @@ textarea.share{width:100%;min-height:70px;padding:10px;border-radius:8px;resize:
         </div>
       </div>
       <div>
-        <span style="color:var(--ink-3);font-size:12px">This cycle's board &mdash; est. share of the pool</span>
-        <div class="rows" id="lb" style="max-height:200px;padding:4px 0"></div>
+        <span style="color:var(--ink-3);font-size:12px" id="lbhead">This cycle's board</span>
+        <div class="lbwrap"><div class="rows" id="lb" style="max-height:200px;padding:4px 0"></div>
+        <div class="tape-cover sm" id="lbcover" style="display:none"><div class="tape t1"><i><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span></i><i><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span></i></div><div class="tape t2"><i><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span></i><i><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span></i></div><div class="tape t3"><i><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span></i><i><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span><span>COMING SOON</span></i></div></div></div>
         <div class="reveal" id="rev3">
           <div style="margin:14px 0 6px;color:var(--ink-3);font-size:12px">Share card</div>
           <div class="sharecard"><canvas id="cardcv" width="1200" height="675"></canvas></div>
@@ -1558,6 +1609,9 @@ var CHAINS={
 };
 var CHAIN=CHAINS.arbitrumSepolia;   // <- pick the network you deployed to (Robinhood Chain is Arbitrum Orbit, so Arbitrum Sepolia behaves the same)
 var PAINT_ADDRESS='';        // <- paste the PaintToken address printed by deploy.js. Empty = simulated balances.
+function poolLabel(){return REWARDS_LIVE?fmt(POOL)+' $PAINT':'$PAINT';}
+var REWARDS_LIVE=false;      // false = "coming soon": anyone can play, no wallet needed, pool/tiers shown as teaser.
+                             // Flip to true once the token + rewards backend are deployed.
 var PAINT_DECIMALS=18;
 var CYCLE_H=6;               // pool cycle length in hours (UTC-aligned: 00, 06, 12, 18)
 var POOL=250000;             // $PAINT distributed per cycle (prototype value)
@@ -1581,16 +1635,18 @@ function lsGet(k){try{return JSON.parse(localStorage.getItem(k));}catch(e){retur
 function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
 
 var wallet=null,practice=false,roundsLeft=ROUNDS_PER_CYCLE,holding=0,tier=0,streak=0,streakLast=null;
+var nick=lsGet('paint_nick')||'';
+function playerKey(){return wallet||'local';}
 function loadPlayer(){
-  if(!wallet){roundsLeft=ROUNDS_PER_CYCLE;streak=0;streakLast=null;return;}
-  var p=lsGet('paint_p_'+wallet)||{};
+  if(!wallet&&REWARDS_LIVE){roundsLeft=ROUNDS_PER_CYCLE;streak=0;streakLast=null;return;}
+  var p=lsGet('paint_p_'+playerKey())||{};
   roundsLeft=(p.cycle===cycleKey())?p.rounds:ROUNDS_PER_CYCLE;
   streakLast=p.streakLast||null;
   streak=(streakLast===dayKey()||streakLast===yesterdayKey())?(p.streak||0):0;
 }
 function savePlayer(){
-  if(!wallet)return;
-  lsSet('paint_p_'+wallet,{cycle:cycleKey(),rounds:roundsLeft,streak:streak,streakLast:streakLast});
+  if(!wallet&&REWARDS_LIVE)return;
+  lsSet('paint_p_'+playerKey(),{cycle:cycleKey(),rounds:roundsLeft,streak:streak,streakLast:streakLast});
 }
 function bumpStreak(){
   var today=dayKey();
@@ -1613,6 +1669,7 @@ function renderStreak(bump){
 }
 function renderPlayBtn(){
   var b=document.getElementById('start');
+  if(!REWARDS_LIVE){b.textContent='Play game';return;}
   b.textContent=wallet?(roundsLeft>0?'Play game · '+roundsLeft+' left':'Play game · practice'):'Play game';
 }
 function simulateBalance(){
@@ -1669,6 +1726,21 @@ function pipsHtml(){
   return h;
 }
 function updateDialog(){
+  document.getElementById('lbpool').textContent=poolLabel();
+  document.getElementById('lbclose').textContent=untilClose();
+  if(!REWARDS_LIVE){
+    document.getElementById('walletstep').style.display='none';
+    document.getElementById('readystep').style.display='none';
+    document.getElementById('soonstep').style.display='block';
+    document.getElementById('arcpips').innerHTML='';
+    document.getElementById('lbpoollbl').textContent='Pool at launch (per 6h)';
+    document.getElementById('lbpool').textContent='TBA $PAINT';
+    document.getElementById('lbcloselbl').textContent='Board resets in';
+    document.getElementById('soonpool').textContent=poolLabel();
+    document.getElementById('ladder1').innerHTML=TIERS.map(function(x,i){return '<span><b>'+x.n+'</b>'+(i?'\u2265'+fmt(x.min/1000)+'k \u00b7 '+x.m+'\u00d7':'0\u00d7')+'</span>';}).join('');
+    return;
+  }
+  document.getElementById('soonstep').style.display='none';
   document.getElementById('walletstep').style.display=wallet?'none':'block';
   document.getElementById('readystep').style.display=wallet?'block':'none';
   document.getElementById('lbpool').textContent=fmt(POOL)+' $PAINT';
@@ -1846,6 +1918,12 @@ document.getElementById('go').onclick=function(){
   practice=roundsLeft<=0;
   document.getElementById('startdlg').className='overlay';run();
 };
+document.getElementById('go0').onclick=function(){
+  practice=true;
+  document.getElementById('startdlg').className='overlay';run();
+};
+document.getElementById('soonx').onclick=function(){window.open('https://twitter.com/intent/follow?screen_name=paint','_blank','noopener');};
+document.getElementById('soonreadme').onclick=function(){document.getElementById('startdlg').className='overlay';freeDraw();openReadme();};
 document.getElementById('start').onclick=openStart;
 
 function mask(ctx){
@@ -1906,6 +1984,14 @@ function untilClose(){
   return h+'h '+(m<10?'0':'')+m+'m';
 }
 function renderPool(info){
+  if(!REWARDS_LIVE){
+    var pb=document.getElementById('pool');
+    pb.className='soonpool';
+    pb.innerHTML='<span class="soon-badge">Coming soon</span><b>$PAINT rewards</b><br>Every 6h a '+poolLabel()+' pool will be split between holders by score.';
+    document.getElementById('boardcover').style.display='';
+    document.getElementById('lbcover').style.display='';
+    return;
+  }
   document.getElementById('poolamt').textContent=fmt(POOL)+' $PAINT';
   document.getElementById('poolelig').textContent=info.elig;
   document.getElementById('poolclose').textContent=untilClose()+' ('+cycleLabel()+')';
@@ -1931,8 +2017,15 @@ function rowHtml(r,i){
   var rank=i+1,t=Math.max(0,Math.min(1,(20-rank)/16));
   var pad=(6+5*t).toFixed(1),av=Math.round(20+13*t);
   var nmSize=(12.5+3*t).toFixed(1),scSize=(13.5+5.5*t).toFixed(1),rkSize=(12.5+4*t).toFixed(1);
-  var inel=!r.w;
+  var inel=REWARDS_LIVE&&!r.w;
   var est=r.w?'≈'+fmt(r.est):'—';
+  if(!REWARDS_LIVE){
+    return '<div class="lrow'+(r.me?' me':'')+'" style="padding:'+pad+'px 8px">'+
+      '<span class="rk" style="font-size:'+rkSize+'px;width:'+(26+6*t)+'px">'+rank+'</span>'+
+      '<span class="av" style="width:'+av+'px;height:'+av+'px;font-size:'+(9+3*t).toFixed(1)+'px">'+initials(r.n)+'</span>'+
+      '<span class="nm" style="font-size:'+nmSize+'px'+(t>0.55?';color:var(--ink)':'')+'">'+disp(r.n)+'</span>'+
+      '<span class="sc" style="font-size:'+scSize+'px">'+r.s+'</span></div>';
+  }
   return '<div class="lrow'+(r.me?' me':'')+(inel?' inel':'')+'" style="padding:'+pad+'px 8px" title="'+(r.w?TIERS[r.t].n+' '+TIERS[r.t].m+'× · streak '+streakMult(r.st||0)+'×':'Not eligible for the pool')+'">'+
     '<span class="rk" style="font-size:'+rkSize+'px;width:'+(26+6*t)+'px">'+rank+'</span>'+
     '<span class="av" style="width:'+av+'px;height:'+av+'px;font-size:'+(9+3*t).toFixed(1)+'px">'+initials(r.n)+'</span>'+
@@ -1946,10 +2039,10 @@ function podHtml(r,place){
   var crown=place===1?'<svg class="crown" width="26" height="16" viewBox="0 0 26 16" fill="currentColor"><path d="M2 14h22l2-12-7 5-6-7-6 7-7-5z"/></svg>':'';
   return '<div class="pod p'+place+'">'+crown+
     '<div class="rank">'+place+(place===1?'st':place===2?'nd':'rd')+'</div>'+
-    '<div class="av" style="border-color:'+TIERS[r.t||0].col+'">'+initials(r.n)+'</div>'+
+    '<div class="av"'+(REWARDS_LIVE?' style="border-color:'+TIERS[r.t||0].col+'"':'')+'>'+initials(r.n)+'</div>'+
     '<div class="nm">'+disp(r.n)+'</div>'+
     '<div class="sc">'+r.s+'</div>'+
-    '<div class="est" style="font-size:11px;color:'+(r.w?'#6ccb5f':'var(--ink-3)')+'">'+(r.w?'≈'+fmt(r.est):'—')+'</div></div>';
+    (REWARDS_LIVE?'<div class="est" style="font-size:11px;color:'+(r.w?'#6ccb5f':'var(--ink-3)')+'">'+(r.w?'≈'+fmt(r.est):'—')+'</div>':'')+'</div>';
 }
 function renderBoard(){
   var rows=lbData.slice().sort(function(a,b){return b.s-a.s}).slice(0,100);
@@ -1966,7 +2059,8 @@ function board(score){
   var me=null;
   lbData.forEach(function(x){if(x.me)me=x;});
   if(me){if(score>me.s)me.s=score;me.t=tier;me.st=streak;}
-  else lbData.push({n:wallet||'you',s:score,me:1,t:tier,st:streak});
+  else lbData.push({n:wallet||nick||'you',s:score,me:1,t:tier,st:streak});
+  if(me&&!wallet&&nick)me.n=nick;
   renderBoard();
   var side=document.getElementById('lbside'),hit=side&&side.querySelector('.lrow.me');
   if(hit)hit.scrollIntoView({block:'center'});
@@ -1997,10 +2091,11 @@ function doSubmit(auto){
   tc.fillStyle='#fff';tc.fillRect(0,0,320,240);
   tc.drawImage(rc,0,0,320,240);tc.drawImage(uc,0,0,320,240);
   saveToGallery(fin,acc,cov);
-  var counted=wallet&&!practice,bumped=false,rank=0,prevBest=0;
+  var counted=REWARDS_LIVE?(wallet&&!practice):false,bumped=false,rank=0,prevBest=0;
+  if(!REWARDS_LIVE&&fin>=MIN_SCORE){bumped=bumpStreak();renderStreak(bumped);}
   lbData.forEach(function(x){if(x.me)prevBest=x.s;});
   if(counted){
-    roundsLeft--;
+    if(REWARDS_LIVE)roundsLeft--;
     if(fin>=MIN_SCORE)bumped=bumpStreak();
     savePlayer();renderPlayBtn();renderStreak(bumped);
     board(fin);
@@ -2046,11 +2141,12 @@ function openResult(fin,acc,cov,counted,rank,prevBest,bumped){
     sfxResult(fin);
     // rank line
     var rl=document.getElementById('rankline');
-    if(!wallet)rl.innerHTML='Practice round \u2014 not on the board. Connect a wallet to compete.';
+    if(!REWARDS_LIVE){var pb=lsGet('paint_best')||0;var nb0=fin>pb?(pb?' \u2014 new personal best!':''):(pb?' (best '+pb+')':'');if(fin>pb)lsSet('paint_best',fin);rl.innerHTML='Saved to your Gallery'+nb0+(bumped?' \u00b7 \ud83d\udd25 streak day '+streak:'')+'. Leaderboard opens at launch.';}
+    else if(!wallet)rl.innerHTML='Practice round \u2014 not on the board. Connect a wallet to compete.';
     else if(!counted)rl.innerHTML='Practice round \u2014 no scored rounds left this cycle.';
     else{
       var nb=fin>prevBest&&prevBest>0?' New personal best!':'';
-      rl.innerHTML='Rank <b>#'+rank+'</b> this cycle'+(fin<prevBest?' (best '+prevBest+' still counts)':'')+nb+' \u00b7 '+roundsLeft+' scored '+(roundsLeft===1?'round':'rounds')+' left'+(bumped?' \u00b7 \ud83d\udd25 streak day '+streak:'');
+      rl.innerHTML='Rank <b>#'+rank+'</b> this cycle'+(fin<prevBest?' (best '+prevBest+' still counts)':'')+nb+(REWARDS_LIVE?' \u00b7 '+roundsLeft+' scored '+(roundsLeft===1?'round':'rounds')+' left':'')+(bumped?' \u00b7 \ud83d\udd25 streak day '+streak:'');
     }
     document.getElementById('rev1').className='reveal in';
     setTimeout(function(){
@@ -2070,6 +2166,13 @@ function buildRewardBox(fin,counted){
   var box=document.getElementById('rewardbox'),row=document.getElementById('rewardrow');
   var me=null;lbData.forEach(function(x){if(x.me)me=x;});
   row.innerHTML='';
+  if(!REWARDS_LIVE){
+    box.className='rewardbox soon-box';
+    box.innerHTML='<div><span class="soon-badge">Coming soon</span> <b>$PAINT rewards</b></div><div class="amt" style="color:#ffb347">'+poolLabel()+' / 6h</div>will be split between holders by score once rewards go live. Keep your streak going \u2014 it already counts.';
+    row.innerHTML='<button class="pill" id="buybtn">Follow on X for the launch date</button>';
+    document.getElementById('buybtn').onclick=function(){window.open('https://twitter.com/intent/follow?screen_name=paint','_blank','noopener');};
+    return;
+  }
   if(!wallet){
     box.className='rewardbox no';
     box.innerHTML='<div>This cycle\u2019s pool: <b>'+fmt(POOL)+' $PAINT</b></div><div class="amt">\u2248 '+fmt(wouldEarn(fin,1,0))+' $PAINT</div>is what this score would earn a Bronze holder right now.<small>Connect a wallet holding \u2265 '+fmt(MIN_HOLD)+' $PAINT to claim a share.</small>';
@@ -2650,12 +2753,16 @@ function readmeText(){
 '6. You get '+ROUNDS_PER_CYCLE+' scored rounds per cycle. Only your best',
 '   score of the cycle counts. Practice rounds are unlimited.',
 '',
-'HOW TO EARN',
-'-----------',
+'HOW TO EARN  (coming soon \u2014 not live yet)',
+'--------------------------------------------',
+'Rewards switch on after the $PAINT token and payout',
+'contracts are deployed. Until then anyone can play,',
+'the board is open to all, and streaks already count.',
+'',
 'Rewards are holder-gated. Connect a wallet on Robinhood Chain',
 'and hold $PAINT to earn from the pool.',
 '',
-'  Pool        : '+fmt(POOL)+' $PAINT every '+CYCLE_H+'h cycle',
+'  Pool        : '+(REWARDS_LIVE?fmt(POOL)+' $PAINT':'TBA $PAINT')+' every '+CYCLE_H+'h cycle',
 '  Paid        : at cycle close (00:00 / 06:00 / 12:00 / 18:00 UTC)',
 '  Min score   : '+MIN_SCORE+' to enter the pool',
 '',
@@ -2672,7 +2779,26 @@ function readmeText(){
 '',
 '  Example: score 80, Silver (1.25x), day-5 streak (1.2x)',
 '           = weight 120. If all eligible weight is 12,000',
-'           you receive 1% of the pool = '+fmt(POOL*0.01)+' $PAINT.',
+'           you receive 1% of the pool.',
+'',
+'WHERE THE POOL COMES FROM (sustainability)',
+'-------------------------------------------',
+'The pool is never minted out of thin air. It is filled from',
+'four sources so it does not run dry when the initial reward',
+'reserve is spent:',
+'  1. Reward reserve  - a fixed slice of supply, released on',
+'     a decaying schedule (the pool shrinks by 15% each month',
+'     until it reaches a floor).',
+'  2. Buyback         - protocol-owned LP fees and any token',
+'     tax are used to buy $PAINT on the market and top up the',
+'     pool every cycle.',
+'  3. Sponsored cycles - a project can fund a cycle in its own',
+'     token to have its logo featured in the challenge.',
+'  4. Player sinks    - optional entry fee for scored rounds',
+'     and cosmetics (brushes, palettes, frames) flow back in.',
+'The cycle pool = min(cap, 1% of the treasury), so it scales',
+'with what is actually there. Unclaimed rewards return to',
+'the treasury after 30 days.',
 '',
 'STREAK',
 '------',
@@ -2752,7 +2878,7 @@ setInterval(function(){
   document.getElementById('paint').textContent='$'+p.toFixed(6);
 },1400);
 
-shape=pickShape();paintRef();preview();freeDraw();fitPaper();renderBoard();updateWallet();
+shape=pickShape();paintRef();preview();freeDraw();fitPaper();if(!REWARDS_LIVE)loadPlayer();renderBoard();updateWallet();
 })();
 </script>
 </body>
